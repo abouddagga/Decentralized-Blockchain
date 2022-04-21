@@ -7,10 +7,10 @@ const SHA256 = require('crypto-js/sha256');
 const EC = require('elliptic').ec;
 const ec = new EC('secp256k1');
 
-const maxTransactions = 4; //maximum number of transactions per block.
+const maxTransactions = 4;
 const initialReward = 100;
 const difficultyInitial = 2;
-const mineRate = 2000; //mining difficulty rate
+const mineRate = 2000;
 
 class Blockchain {
   constructor() {

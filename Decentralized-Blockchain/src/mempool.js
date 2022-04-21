@@ -1,5 +1,3 @@
-//The blockchain network's pending transactions, waiting to be mined by miners
-
 class MemPool {
   constructor() {
     this.transactions = [];
@@ -21,7 +19,6 @@ class MemPool {
 
     this.generateReward(minerAddress);
 
-    // each tx in this block shold get the timeStamp of its block
     for (const trans of tempPool) {
       trans.timeStamp = Date.now();
     }
@@ -35,8 +32,6 @@ class MemPool {
   }
 
   popTx() {
-    // As per to Mica requirements - one block can only take up to 4 txs
-    // each tx that doesn't make it to the mining process stays in memPool
     const tempPool = this.transactions.slice(0, MAX_NUM_OF_TX_PER_BLOCK - 1);
     this.transactions = this.transactions.slice(MAX_NUM_OF_TX_PER_BLOCK - 1);
     return tempPool;

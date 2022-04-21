@@ -1,22 +1,20 @@
-//Creates a new Merkle tree for a block
 const SHA256 = require('crypto-js/sha256');
 
 class MerkleTree {
   constructor(nodesList) {
     this.terminalNodes = nodesList;
-    this.layers = [this.terminalNodes]; //this defines number of tree levels.
+    this.layers = [this.terminalNodes];
     this.calculateTree(this.terminalNodes);
   }
 
   calculateTree(nodes) {
-    if (nodes.length === 1) { // if I only have 1 transaction, return it 
+    if (nodes.length === 1) { 
       return nodes[0];
     }
     const layerID = this.layers.length;
 
     this.layers.push([]);
 
-    // take 2 hashes of different transactions and hash them, push to the layers list (loop until no more even no. of leaves)
     for (let i = 0; i < nodes.length - 1; i += 2) {
       this.layers[layerID].push(SHA256(nodes[i] + nodes[i + 1]).toString());
     }
@@ -42,7 +40,7 @@ class MerkleTree {
 
   getProof(leaf) {
     let index;
-    const prf = []; //proof
+    const prf = []; 
 
     for (let i = 0; i < this.terminalNodes.length; i++) {
       if (leaf === this.terminalNodes[i].toString()) {
@@ -57,7 +55,7 @@ class MerkleTree {
 
     for (let i = 0; i < this.layers.length - 1; i++) {
       const layer = this.layers[i];
-      const isRight = index % 2; //for checking if its the right node.
+      const isRight = index % 2;
       const pairID = isRight ? index - 1 : index + 1;
 
       prf.push({

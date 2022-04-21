@@ -1,6 +1,3 @@
-//Creating new block
-
-
 const SHA256 = require('crypto-js/sha256');
 const {MerkleTree} = require('./merkle');
 

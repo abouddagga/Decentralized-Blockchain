@@ -1,6 +1,3 @@
-//Creates new wallet, adds new transactions by wallet owner and signs them
-
-
 const EC = require('elliptic').ec;
 const ec = new EC('secp256k1');
 
